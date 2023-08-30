@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\CustomerResource\Pages;
 
 use App\Filament\Resources\CustomerResource;
-use App\Filament\Resources\CustomerResource\Widgets\CustomerOverview;
+use App\Filament\Widgets\CustomerStatsOverview;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -21,7 +21,7 @@ class ListCustomers extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            CustomerOverview::class
+            CustomerStatsOverview::class,
         ];
     }
 }

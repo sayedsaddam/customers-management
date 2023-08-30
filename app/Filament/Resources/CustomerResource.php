@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\CustomerResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CustomerResource\RelationManagers;
-use App\Filament\Resources\CustomerResource\Widgets\CustomerOverview;
+use App\Filament\Widgets\CustomerStatsOverview;
 
 class CustomerResource extends Resource
 {
@@ -82,11 +82,13 @@ class CustomerResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('status')
+                    ->label('Customer Status')
                     ->options([
                         1 => 'Active',
                         0 => 'Inactive',
                     ]),
                 SelectFilter::make('buyback_status')
+                    ->label('Buyback Status')
                     ->options([
                         1 => 'Applied',
                         0 => 'No Applied'
@@ -112,7 +114,7 @@ class CustomerResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            CustomerOverview::class,
+            CustomerStatsOverview::class,
         ];
     }
 
