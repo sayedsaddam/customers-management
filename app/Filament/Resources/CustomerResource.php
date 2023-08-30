@@ -2,23 +2,26 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CustomerResource\Pages;
-use App\Filament\Resources\CustomerResource\RelationManagers;
-use App\Models\Customer;
 use Filament\Forms;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use App\Models\Customer;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Card;
+use Filament\Tables\Filters\Filter;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\CustomerResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\CustomerResource\RelationManagers;
+use App\Filament\Resources\CustomerResource\Widgets\CustomerOverview;
 
 class CustomerResource extends Resource
 {
@@ -73,13 +76,21 @@ class CustomerResource extends Resource
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('contact')->searchable(),
-                TextColumn::make('email')->searchable(),
                 IconColumn::make('status')->boolean(),
                 TextColumn::make('investment_amount')->sortable()->money('pkr'),
                 IconColumn::make('buyback_status')->boolean()->label('Buyback'),
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options([
+                        1 => 'Active',
+                        0 => 'Inactive',
+                    ]),
+                SelectFilter::make('buyback_status')
+                    ->options([
+                        1 => 'Applied',
+                        0 => 'No Applied'
+                    ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -95,6 +106,13 @@ class CustomerResource extends Resource
     {
         return [
             //
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            CustomerOverview::class,
         ];
     }
 

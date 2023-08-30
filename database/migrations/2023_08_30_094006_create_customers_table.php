@@ -25,7 +25,7 @@ return new class extends Migration
             $table->boolean('buyback_status')->default(false);
             $table->decimal('buyback_amount', 10, 2);
             $table->date('buyback_date')->nullable();
-            $table->boolean('status')->default(true);
+            $table->boolean('status')->default(true)->comment('1 for active and 0 ');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
