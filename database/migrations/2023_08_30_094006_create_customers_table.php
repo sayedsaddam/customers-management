@@ -17,15 +17,19 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('contact');
+            $table->string('fatherName')->nullable();
+            $table->string('cnic')->nullable();
             $table->string('email')->nullable();
-            $table->longText('address')->nullable();
-            $table->decimal('investment_amount', 10, 2);
-            $table->date('investment_date')->nullable();
-            $table->boolean('buyback_status')->default(false);
-            $table->decimal('buyback_amount', 10, 2);
-            $table->date('buyback_date')->nullable();
-            $table->boolean('status')->default(true)->comment('1 for active and 0 ');
+            $table->string('phone')->nullable();
+            $table->date('dob')->nullable();
+            $table->string('city')->nullable();
+            $table->text('address')->nullable();
+            $table->string('nokName')->nullable();
+            $table->string('nokCnic')->nullable();
+            $table->string('nokPhone')->nullable();
+            $table->string('nokEmail')->nullable();
+            $table->string('nokRelation')->nullable();
+            $table->enum('status', array('Active', 'Inactive', 'Cancelled', 'Buyback'))->defaul('Active');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
