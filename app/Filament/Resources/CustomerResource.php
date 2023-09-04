@@ -10,7 +10,9 @@ use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
 use Filament\Tables\Filters\Filter;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -18,10 +20,11 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\TextInput\Mask;
+use App\Filament\Widgets\CustomerStatsOverview;
 use App\Filament\Resources\CustomerResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CustomerResource\RelationManagers;
-use App\Filament\Widgets\CustomerStatsOverview;
 
 class CustomerResource extends Resource
 {
@@ -33,39 +36,78 @@ class CustomerResource extends Resource
     {
         return $form
             ->schema([
-                Card::make()
+                Section::make('Customer Information')
                 ->schema([
                     TextInput::make('name')
                         ->required()
                         ->placeholder('Customer Name'),
-                    TextInput::make('contact')
+                    TextInput::make('cnic')
                         ->required()
-                        ->placeholder('Customer Contact'),
+                        ->label('CNIC #')
+                        ->placeholder('Customer CNIC'),
                     TextInput::make('email')
+                        ->email()
                         ->placeholder('Customer Email'),
-                    TextInput::make('investment_amount')
+                    TextInput::make('phone')
                         ->required()
-                        ->numeric()
-                        ->placeholder('Amount Invested'),
-                    DatePicker::make('investment_date')
+                        ->label('Phone #')
+                        ->tel()
+                        ->placeholder('Customer Contact'),
+                    DatePicker::make('dob')
                         ->required()
+                        ->label('Date of Birth')
+                        ->placeholder('Date of Birth'),
+                    TextInput::make('city')
+                        ->label('City')
+                        ->placeholder('City'),
+                    TextInput::make('address')
+                        ->label('Address')
+                        ->placeholder('Address'),
+                    Select::make('status')
+                    ->options([
+                        'active' => 'Active',
+                        'inactive' => 'Inactive',
+                        'cancelled' => 'Cancelled',
+                        'buyback' => 'Buyback',
+                    ]),
+                    TextInput::make('investmentAmount')->mask(fn (TextInput\Mask $mask) => $mask
+                        ->patternBlocks([
+                            'money' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->thousandsSeparator(',')
+                                ->decimalSeparator('.'),
+                        ])
+                        ->pattern('money'),
+                    )
+                    ->placeholder('Investment Amount'),
+                    DatePicker::make('investmentDate')
+                        ->label('Investment Date')
                         ->placeholder('Investment Date'),
-                    TextInput::make('buyback_amount')
-                        ->required()
-                        ->numeric()
-                        ->placeholder('Buyback Amount'),
-                    DatePicker::make('buyback_date')
-                        ->placeholder('Buyback Date'),
-                    Textarea::make('address')
-                        ->placeholder('Customer Address')
-                        ->columns(1),
-                    Toggle::make('status')
-                        ->onColor('success')
-                        ->default('active'),
-                    Toggle::make('Buyback Status')
-                        ->onColor('success'),
                 ])
+                ->collapsible()
                 ->columns(2),
+                Section::make('Next of Kin Information')
+                    ->schema([
+                        TextInput::make('nokName')
+                            ->required()
+                            ->label('NoK Name')
+                            ->placeholder('Next of Kin Name'),
+                        TextInput::make('nokCnic')
+                            ->required()
+                            ->label('Nok CNIC #')
+                            ->placeholder('Next of Kin CNIC #'),
+                        TextInput::make('nokEmail')
+                            ->label('Nok Email')
+                            ->placeholder('Next of Kin Email'),
+                        TextInput::make('nokPhone')
+                            ->label('Nok Phone')
+                            ->placeholder('Next of Kin Phone #'),
+                        TextInput::make('nokRelation')
+                            ->label('Relationship with Customer')
+                            ->placeholder('Relationship with Customer')
+                    ])
+                    ->collapsible()
+                    ->columns(3),
             ]);
     }
 

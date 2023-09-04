@@ -29,7 +29,9 @@ return new class extends Migration
             $table->string('nokPhone')->nullable();
             $table->string('nokEmail')->nullable();
             $table->string('nokRelation')->nullable();
-            $table->enum('status', array('Active', 'Inactive', 'Cancelled', 'Buyback'))->defaul('Active');
+            $table->enum('status', array('active', 'inactive', 'cancelled', 'buyback'))->defaul('active');
+            $table->decimal('investmentAmount', 10, 2)->nullable();
+            $table->date('investmentDate')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
