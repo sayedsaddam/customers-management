@@ -41,10 +41,15 @@ class CustomerResource extends Resource
                     TextInput::make('name')
                         ->required()
                         ->placeholder('Customer Name'),
+                    TextInput::make('fatherName')
+                        ->required()
+                        ->label('Father Name')
+                        ->placeholder('Father Name'),
                     TextInput::make('cnic')
                         ->required()
-                        ->label('CNIC #')
-                        ->placeholder('Customer CNIC'),
+                        ->label('Customer CNIC')
+                        ->placeholder('Customer CNIC')
+                        ->mask(fn (TextInput\Mask $mask) => $mask->pattern('00000-0000000-0')),
                     TextInput::make('email')
                         ->email()
                         ->placeholder('Customer Email'),
@@ -94,8 +99,9 @@ class CustomerResource extends Resource
                             ->placeholder('Next of Kin Name'),
                         TextInput::make('nokCnic')
                             ->required()
-                            ->label('Nok CNIC #')
-                            ->placeholder('Next of Kin CNIC #'),
+                            ->label('NoK CNIC')
+                            ->placeholder('NoK CNIC')
+                            ->mask(fn (TextInput\Mask $mask) => $mask->pattern('00000-0000000-0')),
                         TextInput::make('nokEmail')
                             ->label('Nok Email')
                             ->placeholder('Next of Kin Email'),
@@ -117,17 +123,16 @@ class CustomerResource extends Resource
             ->columns([
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
-                TextColumn::make('contact')->searchable(),
-                IconColumn::make('status')->boolean(),
-                TextColumn::make('investment_amount')->sortable()->money('pkr'),
-                IconColumn::make('buyback_status')->boolean()->label('Buyback'),
+                TextColumn::make('fatherName')->sortable()->searchable(),
+                TextColumn::make('phone')->searchable(),
+                TextColumn::make('status'),
             ])
             ->filters([
                 SelectFilter::make('status')
                     ->label('Customer Status')
                     ->options([
-                        1 => 'Active',
-                        0 => 'Inactive',
+                        'active' => 'Active',
+                        'inactive' => 'Inactive',
                     ]),
                 SelectFilter::make('buyback_status')
                     ->label('Buyback Status')

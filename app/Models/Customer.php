@@ -24,6 +24,8 @@ class Customer extends Model
         'nokEmail',
         'nokRelation',
         'status',
+        'investmentAmount',
+        'investmentDate',
         'user_id',
     ];
 }
