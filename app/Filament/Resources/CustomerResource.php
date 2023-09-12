@@ -129,17 +129,13 @@ class CustomerResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('status')
-                    ->label('Customer Status')
-                    ->options([
-                        'active' => 'Active',
-                        'inactive' => 'Inactive',
-                    ]),
-                SelectFilter::make('buyback_status')
-                    ->label('Buyback Status')
-                    ->options([
-                        1 => 'Applied',
-                        0 => 'No Applied'
-                    ])
+                ->label('Customer Status')
+                ->options([
+                    'active' => 'Active',
+                    'inactive' => 'Inactive',
+                    'cancelled' => 'Cancelled',
+                    'buyback' => 'Buyback'
+                ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
