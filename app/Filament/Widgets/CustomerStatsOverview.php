@@ -16,9 +16,7 @@ class CustomerStatsOverview extends BaseWidget
         $buyback = Customer::where('status', 'buyback')->count();
         return [
             Card::make('Total Customers', Customer::all()->count()),
-            Card::make('Active Customers', $active)
-                ->description('Active customers')
-                ->descriptionIcon('heroicon-o-users'),
+            Card::make('Active Customers', $active),
             Card::make('Inactive Customers', $inactive),
             Card::make('Cancelled Customers', $cancelled),
             Card::make('Buyback Customers', $buyback),
