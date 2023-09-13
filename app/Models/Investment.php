@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Investment extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['customer_id', 'investmentAmount', 'investmentDate'];
+
+    public function customer(){
+        return $this->belongsTo(Customer::class);
+    }
 }
