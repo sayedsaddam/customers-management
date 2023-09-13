@@ -65,20 +65,7 @@ class CustomerResource extends Resource
                         'inactive' => 'Inactive',
                         'cancelled' => 'Cancelled',
                         'buyback' => 'Buyback',
-                    ]),
-                    TextInput::make('investmentAmount')->mask(fn (TextInput\Mask $mask) => $mask
-                        ->patternBlocks([
-                            'money' => fn (Mask $mask) => $mask
-                                ->numeric()
-                                ->thousandsSeparator(',')
-                                ->decimalSeparator('.'),
-                        ])
-                        ->pattern('money'),
-                    )
-                    ->placeholder('Investment Amount'),
-                    DatePicker::make('investmentDate')
-                        ->label('Investment Date')
-                        ->placeholder('Investment Date'),
+                    ])
                 ])
                 ->collapsible()
                 ->columns(2),
