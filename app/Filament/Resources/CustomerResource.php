@@ -16,6 +16,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Forms\Components\TextInput\Mask;
 use App\Filament\Widgets\CustomerStatsOverview;
 use App\Filament\Resources\CustomerResource\Pages;
+use App\Filament\Resources\CustomerResource\RelationManagers\BuybackTransactionsRelationManager;
 use App\Filament\Resources\CustomerResource\RelationManagers\InvestmentsRelationManager;
 
 class CustomerResource extends Resource
@@ -130,6 +131,7 @@ class CustomerResource extends Resource
     {
         return [
             InvestmentsRelationManager::class,
+            BuybackTransactionsRelationManager::class,
         ];
     }
 

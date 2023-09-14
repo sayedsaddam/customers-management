@@ -10,9 +10,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
 
-class InvestmentsRelationManager extends RelationManager
+class BuybackTransactionsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'investments';
+    protected static string $relationship = 'buybackTransactions';
 
     protected static ?string $recordTitleAttribute = 'customer_id';
 
@@ -20,14 +20,14 @@ class InvestmentsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                DatePicker::make('investmentDate')
-                    ->required()
-                    ->placeholder('Investment Date'),
-                    TextInput::make('investmentAmount')
+                TextInput::make('buybackAmount')
                     ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
+                    ->required()
                     ->placeholder('Investment Amount')
-                    ->numeric()
-                    ->required(),
+                    ->numeric(),
+                DatePicker::make('buybackDate')
+                    ->required()
+                    ->placeholder('Buyback Date')
             ]);
     }
 
@@ -35,9 +35,9 @@ class InvestmentsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                TextColumn::make('customer.name')->sortable(),
-                TextColumn::make('investmentAmount'),
-                TextColumn::make('investmentDate')->dateTime('M d, Y'),
+                TextColumn::make('customer.name'),
+                TextColumn::make('buybackAmount'),
+                TextColumn::make('buybackDate')->date('M d, Y')->sortable(),
             ])
             ->filters([
                 //
