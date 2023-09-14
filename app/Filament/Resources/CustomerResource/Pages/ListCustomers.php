@@ -18,7 +18,7 @@ class ListCustomers extends ListRecords
         ];
     }
 
-    protected function getHeaderWidgets(): array
+    protected function getFooterWidgets(): array
     {
         return [
             CustomerStatsOverview::class,
