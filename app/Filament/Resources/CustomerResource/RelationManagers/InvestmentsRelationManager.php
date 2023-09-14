@@ -35,7 +35,6 @@ class InvestmentsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                TextColumn::make('customer_id'),
                 TextColumn::make('investmentAmount'),
                 TextColumn::make('investmentDate')->dateTime('M d, Y'),
             ])
@@ -48,6 +47,7 @@ class InvestmentsRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
