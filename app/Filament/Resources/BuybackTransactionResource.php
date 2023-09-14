@@ -20,6 +20,10 @@ class BuybackTransactionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $navigationLabel = 'Buybacks';
+
     public static function form(Form $form): Form
     {
         return $form
