@@ -36,4 +36,8 @@ class Customer extends Model
     public function buybackTransactions(){
         return $this->hasMany(BuybackTransaction::class);
     }
+
+    public function rentalTransactions(){
+        return $this->hasMany(RentalTransaction::class);
+    }
 }

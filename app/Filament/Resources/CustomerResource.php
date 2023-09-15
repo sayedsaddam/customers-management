@@ -17,6 +17,7 @@ use App\Filament\Widgets\CustomerStatsOverview;
 use App\Filament\Resources\CustomerResource\Pages;
 use App\Filament\Resources\CustomerResource\RelationManagers\BuybackTransactionsRelationManager;
 use App\Filament\Resources\CustomerResource\RelationManagers\InvestmentsRelationManager;
+use App\Filament\Resources\CustomerResource\RelationManagers\RentalTransactionsRelationManager;
 
 class CustomerResource extends Resource
 {
@@ -133,6 +134,7 @@ class CustomerResource extends Resource
         return [
             InvestmentsRelationManager::class,
             BuybackTransactionsRelationManager::class,
+            RentalTransactionsRelationManager::class,
         ];
     }
 
