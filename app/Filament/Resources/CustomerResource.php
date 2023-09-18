@@ -109,6 +109,7 @@ class CustomerResource extends Resource
                 TextColumn::make('phone')->searchable(),
                 TextColumn::make('status'),
             ])
+            ->defaultSort('id', 'desc')
             ->filters([
                 SelectFilter::make('status')
                 ->label('Customer Status')
