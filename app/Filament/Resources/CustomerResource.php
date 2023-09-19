@@ -106,7 +106,7 @@ class CustomerResource extends Resource
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('fatherName')->sortable()->searchable(),
-                TextColumn::make('phone')->searchable(),
+                TextColumn::make('phone')->searchable()->toggleable(),
                 TextColumn::make('status'),
             ])
             ->defaultSort('id', 'desc')

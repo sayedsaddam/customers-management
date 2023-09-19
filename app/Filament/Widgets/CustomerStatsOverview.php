@@ -8,6 +8,8 @@ use Filament\Widgets\StatsOverviewWidget\Card;
 
 class CustomerStatsOverview extends BaseWidget
 {
+    protected static ?int $sort = 2;
+
     protected function getCards(): array
     {
         $active = Customer::where('status', 'active')->count();
