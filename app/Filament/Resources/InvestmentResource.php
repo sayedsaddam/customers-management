@@ -56,10 +56,17 @@ class InvestmentResource extends Resource
                         ])
                         ->searchable()
                         ->required(),
+                    Select::make('rentalStatus')
+                            ->options([
+                                'active' => 'Active',
+                                'inactive' => 'Inactive',
+                            ])
+                            ->required(),
                     TextInput::make('rentalPercentage')
                             ->required()
                             ->label('Rental Percentage')
                             ->placeholder('Rental Percentage')
+
                 ])
                 ->columns(2)
             ]);

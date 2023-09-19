@@ -9,7 +9,19 @@ class Investment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['customer_id', 'investmentAmount', 'investmentDate', 'project', 'rentalPercentage'];
+    protected $fillable = [
+            'customer_id',
+            'investmentAmount',
+            'investmentDate',
+            'project',
+            'rentalStatus',
+            'rentalPercentage',
+            'floorName',
+            'sqft',
+            'rate',
+            'saleValue',
+            'amountReceived'
+        ];
 
     public function customer(){
         return $this->belongsTo(Customer::class);
