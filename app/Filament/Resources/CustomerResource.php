@@ -33,6 +33,10 @@ class CustomerResource extends Resource
             ->schema([
                 Section::make('Customer Information')
                 ->schema([
+                    TextInput::make('customerID')
+                        ->required()
+                        ->label('Customer ID')
+                        ->placeholder('Customer Identification #'),
                     TextInput::make('name')
                         ->required()
                         ->placeholder('Customer Name'),
@@ -66,7 +70,6 @@ class CustomerResource extends Resource
                     Select::make('status')
                     ->options([
                         'active' => 'Active',
-                        'inactive' => 'Inactive',
                         'cancelled' => 'Cancelled',
                         'buyback' => 'Buyback',
                     ])
@@ -105,6 +108,7 @@ class CustomerResource extends Resource
             ->columns([
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
+                TextColumn::make('customerID')->label('Customer ID'),
                 TextColumn::make('fatherName')->sortable()->searchable(),
                 TextColumn::make('phone')->searchable()->toggleable(),
                 TextColumn::make('status'),
@@ -115,7 +119,6 @@ class CustomerResource extends Resource
                 ->label('Customer Status')
                 ->options([
                     'active' => 'Active',
-                    'inactive' => 'Inactive',
                     'cancelled' => 'Cancelled',
                     'buyback' => 'Buyback'
                 ])
