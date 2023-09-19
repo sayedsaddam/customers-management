@@ -99,6 +99,27 @@ class CustomerResource extends Resource
                     ])
                     ->collapsible()
                     ->columns(3),
+                Section::make('Bank Information')
+                    ->schema([
+                        TextInput::make('accountTitle')
+                            ->label('Account Title')
+                            ->required()
+                            ->placeholder('Account Title'),
+                        TextInput::make('bankName')
+                            ->label('Bank Name')
+                            ->required()
+                            ->placeholder('Bank Name'),
+                        TextInput::make('branchCode')
+                            ->label('Branch Code')
+                            ->required()
+                            ->placeholder('Branch Code'),
+                        TextInput::make('accountNumber')
+                            ->label('Account Number')
+                            ->required()
+                            ->placeholder('Account Number'),
+                    ])
+                    ->collapsible()
+                    ->columns(2)
             ]);
     }
 
