@@ -43,6 +43,18 @@ class InvestmentResource extends Resource
                         ->required()
                         ->placeholder('Investment Amount')
                         ->numeric(),
+                    Select::make('project')
+                        ->options([
+                            '091 Mall' => '091 Mall',
+                            'Florenza' => 'Florenza',
+                            'AH Tower' => 'AH Tower',
+                            'AH Residencia' => 'AH Residencia',
+                            'AH City' => 'AH City',
+                            'MoH' => 'MoH',
+                            'North Hills' => 'North Hills',
+                        ])
+                        ->searchable()
+                        ->required()
                 ])
                 ->columns(2)
             ]);
@@ -53,6 +65,7 @@ class InvestmentResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('customer.name')->searchable()->sortable(),
+                TextColumn::make('project'),
                 TextColumn::make('investmentDate')->date('M d, Y')->sortable(),
                 TextColumn::make('created_at')->date('M d, Y')->sortable(),
             ])
