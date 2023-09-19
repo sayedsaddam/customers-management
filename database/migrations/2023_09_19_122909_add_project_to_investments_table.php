@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('investments', function (Blueprint $table) {
             $table->string('project')->after('investmentDate')->nullable();
+            $table->string('rentalPercentage')->after('project')->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ return new class extends Migration
     {
         Schema::table('investments', function (Blueprint $table) {
             $table->dropColumn('project');
+            $table->dropColumn('rentalPercentage');
         });
     }
 };

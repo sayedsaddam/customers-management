@@ -14,6 +14,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use App\Filament\Resources\InvestmentResource\Pages;
+use Faker\Provider\ar_EG\Text;
 
 class InvestmentResource extends Resource
 {
@@ -54,7 +55,11 @@ class InvestmentResource extends Resource
                             'North Hills' => 'North Hills',
                         ])
                         ->searchable()
-                        ->required()
+                        ->required(),
+                    TextInput::make('rentalPercentage')
+                            ->required()
+                            ->label('Rental Percentage')
+                            ->placeholder('Rental Percentage')
                 ])
                 ->columns(2)
             ]);
@@ -66,6 +71,7 @@ class InvestmentResource extends Resource
             ->columns([
                 TextColumn::make('customer.name')->searchable()->sortable(),
                 TextColumn::make('project'),
+                TextColumn::make('rentalPercentage')->label('Rental %age'),
                 TextColumn::make('investmentDate')->date('M d, Y')->sortable(),
                 TextColumn::make('created_at')->date('M d, Y')->sortable(),
             ])
