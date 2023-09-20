@@ -5,6 +5,7 @@ namespace App\Filament\Widgets;
 use App\Models\Customer;
 use Closure;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Database\Eloquent\Builder;
@@ -28,7 +29,17 @@ class LatestCustomers extends BaseWidget
             TextColumn::make('email'),
             TextColumn::make('phone'),
             TextColumn::make('city'),
-            TextColumn::make('status'),
+            IconColumn::make('status')
+                ->options([
+                    'heroicon-o-receipt-refund' => 'buyback',
+                    'heroicon-o-check-circle' => 'active',
+                    'heroicon-o-x-circle' => 'cancelled'
+                ])
+                ->colors([
+                    'warning' => 'buyback',
+                    'success' => 'active',
+                    'danger' => 'cancelled'
+                ]),
             TextColumn::make('investments.project'),
         ];
     }
