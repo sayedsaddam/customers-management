@@ -40,7 +40,7 @@ class LatestCustomers extends BaseWidget
                     'success' => 'active',
                     'danger' => 'cancelled'
                 ]),
-            TextColumn::make('investments.project'),
+            // TextColumn::make('investments.project'),
         ];
     }
 
