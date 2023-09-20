@@ -29,6 +29,7 @@ class LatestCustomers extends BaseWidget
             TextColumn::make('phone'),
             TextColumn::make('city'),
             TextColumn::make('status'),
+            TextColumn::make('investments.project'),
         ];
     }
 

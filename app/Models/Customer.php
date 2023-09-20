@@ -38,6 +38,10 @@ class Customer extends Model
         return $this->hasMany(Investment::class);
     }
 
+    public function totalInvestments(){
+        return $this->investments()->sum('amountReceived');
+    }
+
     public function buybackTransactions(){
         return $this->hasMany(BuybackTransaction::class);
     }

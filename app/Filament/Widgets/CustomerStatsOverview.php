@@ -13,13 +13,11 @@ class CustomerStatsOverview extends BaseWidget
     protected function getCards(): array
     {
         $active = Customer::where('status', 'active')->count();
-        $inactive = Customer::where('status', 'inactive')->count();
         $cancelled = Customer::where('status', 'cancelled')->count();
         $buyback = Customer::where('status', 'buyback')->count();
         return [
             Card::make('Total Customers', Customer::all()->count()),
             Card::make('Active Customers', $active),
-            Card::make('Inactive Customers', $inactive),
             Card::make('Cancelled Customers', $cancelled),
             Card::make('Buyback Customers', $buyback),
         ];
