@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources\CustomerResource\RelationManagers;
 
-use Filament\Forms\Components\DatePicker;
 use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
 use Filament\Resources\RelationManagers\RelationManager;
 
 class InvestmentsRelationManager extends RelationManager
@@ -23,11 +25,56 @@ class InvestmentsRelationManager extends RelationManager
                 DatePicker::make('investmentDate')
                     ->required()
                     ->placeholder('Investment Date'),
-                    TextInput::make('investmentAmount')
+                TextInput::make('investmentAmount')
                     ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
                     ->placeholder('Investment Amount')
                     ->numeric()
                     ->required(),
+                Select::make('project')
+                    ->options([
+                        '091 Mall' => '091 Mall',
+                        'Florenza' => 'Florenza',
+                        'AH Tower' => 'AH Tower',
+                        'AH Residencia' => 'AH Residencia',
+                        'AH City' => 'AH City',
+                        'MoH' => 'MoH',
+                        'North Hills' => 'North Hills',
+                    ])
+                    ->searchable()
+                    ->required(),
+                Select::make('rentalStatus')
+                    ->options([
+                        'active' => 'Active',
+                        'inactive' => 'Inactive',
+                    ])
+                    ->required(),
+                TextInput::make('rentalPercentage')
+                    ->required()
+                    ->label('Rental Percentage')
+                    ->placeholder('Rental Percentage'),
+                TextInput::make('floorName')
+                        ->required()
+                        ->label('Floor Name')
+                        ->placeholder('Floor Name'),
+                TextInput::make('rate')
+                        ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
+                        ->required()
+                        ->placeholder('Rate')
+                        ->numeric(),
+                TextInput::make('saleValue')
+                        ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
+                        ->required()
+                        ->placeholder('Sale Value')
+                        ->numeric(),
+                TextInput::make('amountReceived')
+                        ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
+                        ->required()
+                        ->placeholder('Amount Received')
+                        ->numeric(),
+                TextInput::make('sqft')
+                    ->required()
+                    ->label('Area in Sqft')
+                    ->placeholder('Area in sqft')
             ]);
     }
 
@@ -35,9 +82,21 @@ class InvestmentsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                TextColumn::make('customer.name')->sortable(),
-                TextColumn::make('investmentAmount'),
-                TextColumn::make('investmentDate')->dateTime('M d, Y'),
+                TextColumn::make('investmentDate')->dateTime('M d, Y')->label('Date'),
+                TextColumn::make('investmentAmount')->label('Amount'),
+                TextColumn::make('project'),
+                TextColumn::make('floorName')->label('Floor'),
+                IconColumn::make('rentalStatus')
+                    ->options([
+                        'heroicon-o-check-circle' => 'active',
+                        'heroicon-o-x-circle' => 'inactive'
+                    ])
+                    ->colors([
+                        'danger' => 'inactive',
+                        'success' => 'active'
+                    ]),
+                TextColumn::make('rentalPercentage')
+                    ->label('Percentage'),
             ])
             ->filters([
                 //

@@ -24,11 +24,11 @@ class RentalTransactionsRelationManager extends RelationManager
                 DatePicker::make('rentalDate')
                     ->required()
                     ->placeholder('Rental Transfer Date'),
-                    TextInput::make('rentalAmount')
+                TextInput::make('rentalAmount')
                     ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
                     ->required()
                     ->placeholder('Rental Transfer Amount')
-                    ->numeric(),
+                    ->numeric()
             ]);
     }
 
