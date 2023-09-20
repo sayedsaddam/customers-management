@@ -65,7 +65,30 @@ class InvestmentResource extends Resource
                     TextInput::make('rentalPercentage')
                             ->required()
                             ->label('Rental Percentage')
-                            ->placeholder('Rental Percentage')
+                            ->placeholder('Rental Percentage'),
+                    TextInput::make('floorName')
+                            ->required()
+                            ->label('Floor Name')
+                            ->placeholder('Floor Name'),
+                    TextInput::make('rate')
+                            ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
+                            ->required()
+                            ->placeholder('Rate')
+                            ->numeric(),
+                    TextInput::make('saleValue')
+                            ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
+                            ->required()
+                            ->placeholder('Sale Value')
+                            ->numeric(),
+                    TextInput::make('amountReceived')
+                            ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
+                            ->required()
+                            ->placeholder('Amount Received')
+                            ->numeric(),
+                    TextInput::make('sqft')
+                            ->required()
+                            ->label('Area in Sqft')
+                            ->placeholder('Area in sqft')
 
                 ])
                 ->columns(2)
