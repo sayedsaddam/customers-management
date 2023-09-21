@@ -18,12 +18,15 @@ use App\Filament\Resources\CustomerResource\Pages;
 use App\Filament\Resources\CustomerResource\RelationManagers\BuybackTransactionsRelationManager;
 use App\Filament\Resources\CustomerResource\RelationManagers\InvestmentsRelationManager;
 use App\Filament\Resources\CustomerResource\RelationManagers\RentalTransactionsRelationManager;
+use Illuminate\Database\Eloquent\Model;
 
 class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?int $navigationSort = 1;
 
@@ -181,5 +184,10 @@ class CustomerResource extends Resource
             'create' => Pages\CreateCustomer::route('/create'),
             'edit' => Pages\EditCustomer::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'city', 'email'];
     }
 }

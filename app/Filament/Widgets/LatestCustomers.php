@@ -24,8 +24,8 @@ class LatestCustomers extends BaseWidget
     protected function getTableColumns(): array
     {
         return [
-            TextColumn::make('name')->label('Customer')->sortable()->searchable(),
-            TextColumn::make('fatherName')->searchable()->label('Father Name'),
+            TextColumn::make('name')->label('Customer'),
+            TextColumn::make('fatherName')->label('Father Name'),
             TextColumn::make('email'),
             TextColumn::make('phone'),
             TextColumn::make('city'),
