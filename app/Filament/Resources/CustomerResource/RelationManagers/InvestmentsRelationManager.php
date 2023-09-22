@@ -11,6 +11,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Resources\RelationManagers\RelationManager;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class InvestmentsRelationManager extends RelationManager
 {
@@ -110,6 +111,7 @@ class InvestmentsRelationManager extends RelationManager
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+                ExportBulkAction::make(),
             ]);
     }
 }

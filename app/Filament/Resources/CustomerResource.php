@@ -10,15 +10,16 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Widgets\CustomerStatsOverview;
 use App\Filament\Resources\CustomerResource\Pages;
-use App\Filament\Resources\CustomerResource\RelationManagers\BuybackTransactionsRelationManager;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use App\Filament\Resources\CustomerResource\RelationManagers\InvestmentsRelationManager;
 use App\Filament\Resources\CustomerResource\RelationManagers\RentalTransactionsRelationManager;
-use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\CustomerResource\RelationManagers\BuybackTransactionsRelationManager;
 
 class CustomerResource extends Resource
 {
@@ -153,6 +154,7 @@ class CustomerResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+                ExportBulkAction::make(),
             ]);
     }
 
