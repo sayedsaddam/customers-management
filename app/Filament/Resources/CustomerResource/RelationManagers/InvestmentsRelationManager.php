@@ -83,6 +83,7 @@ class InvestmentsRelationManager extends RelationManager
     {
         return $table
             ->columns([
+                TextColumn::make('customer.name')->label('Name'),
                 TextColumn::make('investmentDate')->dateTime('M d, Y')->label('Date'),
                 TextColumn::make('investmentAmount')->label('Amount'),
                 TextColumn::make('project'),
