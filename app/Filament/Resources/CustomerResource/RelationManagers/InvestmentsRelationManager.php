@@ -84,11 +84,23 @@ class InvestmentsRelationManager extends RelationManager
         return $table
             ->columns([
                 TextColumn::make('customer.name')->label('Name'),
+                TextColumn::make('customer.fatherName')->label('Father Name'),
+                TextColumn::make('customer.cnic')->label('CNIC'),
+                TextColumn::make('customer.email')->label('Email'),
+                TextColumn::make('customer.phone')->label('Phone'),
+                TextColumn::make('customer.dob')->label('Birthday')->date(),
+                TextColumn::make('customer.city')->label('City'),
+                TextColumn::make('customer.address')->label('Address'),
+                TextColumn::make('customer.nokName')->label('Nok'),
+                TextColumn::make('customer.nokCnic')->label('CNIC'),
                 TextColumn::make('investmentDate')->dateTime('M d, Y')->label('Date'),
                 TextColumn::make('investmentAmount')->label('Amount'),
+                TextColumn::make('saleValue')->label('Sale Value'),
+                TextColumn::make('sqft')->label('Area'),
+                TextColumn::make('rate')->label('Rate /sqft'),
                 TextColumn::make('project'),
                 TextColumn::make('floorName')->label('Floor'),
-                IconColumn::make('rentalStatus')
+                IconColumn::make('rentalStatus')->label('Rental Status')
                     ->options([
                         'heroicon-o-check-circle' => 'active',
                         'heroicon-o-x-circle' => 'inactive'
