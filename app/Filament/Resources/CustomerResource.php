@@ -18,6 +18,7 @@ use App\Filament\Widgets\CustomerStatsOverview;
 use App\Filament\Resources\CustomerResource\Pages;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use App\Filament\Resources\CustomerResource\RelationManagers\InvestmentsRelationManager;
+use App\Filament\Resources\CustomerResource\RelationManagers\InstallmentsRelationManager;
 use App\Filament\Resources\CustomerResource\RelationManagers\RentalTransactionsRelationManager;
 use App\Filament\Resources\CustomerResource\RelationManagers\BuybackTransactionsRelationManager;
 
@@ -164,6 +165,7 @@ class CustomerResource extends Resource
             InvestmentsRelationManager::class,
             BuybackTransactionsRelationManager::class,
             RentalTransactionsRelationManager::class,
+            InstallmentsRelationManager::class,
         ];
     }
 
