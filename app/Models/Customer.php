@@ -49,4 +49,8 @@ class Customer extends Model
     public function rentalTransactions(){
         return $this->hasMany(RentalTransaction::class);
     }
+
+    public function installments(){
+        return $this->hasMany(Installment::class);
+    }
 }
