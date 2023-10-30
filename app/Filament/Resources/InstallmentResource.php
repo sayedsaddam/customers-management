@@ -2,15 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\InstallmentResource\Pages;
+use Filament\Tables;
 use App\Models\Installment;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
-use Filament\Tables;
+use Filament\Forms\Components\DatePicker;
+use App\Filament\Resources\InstallmentResource\Pages;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class InstallmentResource extends Resource
 {
@@ -32,7 +35,7 @@ class InstallmentResource extends Resource
                             ->required()
                             ->preload(),
                         Select::make('investment_id')
-                            ->relationship('investments', 'project')
+                            ->relationship('investment', 'project')
                             ->label('Project, Invested In')
                             ->required()
                             ->searchable()
@@ -60,21 +63,14 @@ class InstallmentResource extends Resource
                             ->default('0')
                             ->label('Branch Code'),
                         TextInput::make('amount')
-                            ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
+                            ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 2))
                             ->required()
                             ->placeholder('Amount')
                             ->numeric(),
-                        Select::make('receivedAt')
-                            ->options([
-                                'Islamabad' => 'Islamabad',
-                                'Peshawar' => 'Peshawar',
-                                'Kohat' => 'Kohat',
-                                'Hangu' => 'Hangu',
-                                'D.I Khan' => 'D.I Khan',
-                                'Mardan' => 'Mardan'
-                            ])
-                            ->searchable()
-                            ->label('Received In')
+                        DatePicker::make('receivedAt')
+                            ->placeholder('Receiving Date')
+                            ->required()
+                            ->label('Receiving Date'),
                     ])
                     ->columns(2)
             ]);
@@ -84,7 +80,14 @@ class InstallmentResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('customer.name')->searchable()->sortable()->label('Name'),
+                TextColumn::make('investment.project')->label('Project'),
+                TextColumn::make('investment.investmentAmount'),
+                TextColumn::make('amount')->label('Amount'),
+                TextColumn::make('paymentMode')->label('Payment Mode')->translateLabel(),
+                TextColumn::make('receivedAt')->label('Receiving Date')->date(),
+                TextColumn::make('bankName')->label('Bank'),
+                TextColumn::make('branchCode')->label('Br. Code'),
             ])
             ->filters([
                 //
@@ -94,6 +97,7 @@ class InstallmentResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+                ExportBulkAction::make(),
             ]);
     }
 

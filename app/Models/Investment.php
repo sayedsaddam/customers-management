@@ -27,7 +27,7 @@ class Investment extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function installments(){
+    public function installment(){
         return $this->hasMany(Installment::class);
     }
 }

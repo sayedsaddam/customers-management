@@ -24,7 +24,7 @@ class Installment extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function investments(){
+    public function investment(){
         return $this->belongsTo(Investment::class);
     }
 }
