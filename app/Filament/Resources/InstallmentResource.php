@@ -40,12 +40,13 @@ class InstallmentResource extends Resource
                         Select::make('paymentMode')
                             ->options([
                                 'cash' => 'Cash',
-                                'checque' => 'Cheque',
+                                'cheque' => 'Cheque',
                                 'ibft' => 'IBFT',
                                 'wire transfer' => 'Wire Transfer',
                                 'pay order' => 'Pay Order',
                             ])
-                            ->required(),
+                            ->required()
+                            ->searchable(),
                         TextInput::make('referenceNo')
                             ->placeholder('Reference Number')
                             ->default('0')
