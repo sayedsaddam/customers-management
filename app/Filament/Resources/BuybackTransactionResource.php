@@ -18,9 +18,9 @@ class BuybackTransactionResource extends Resource
 {
     protected static ?string $model = BuybackTransaction::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
+    protected static ?string $navigationIcon = 'heroicon-o-x-circle';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
 
     protected static ?string $navigationLabel = 'Buybacks';
 
