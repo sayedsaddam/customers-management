@@ -23,4 +23,8 @@ class Installment extends Model
     public function customer(){
         return $this->belongsTo(Customer::class);
     }
+
+    public function investments(){
+        return $this->belongsTo(Investment::class);
+    }
 }

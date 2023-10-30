@@ -4,6 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\InstallmentResource\Pages;
 use App\Models\Installment;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -21,7 +24,58 @@ class InstallmentResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Card::make()
+                    ->schema([
+                        Select::make('customer_id')
+                            ->relationship('customer', 'name')
+                            ->searchable()
+                            ->required()
+                            ->preload(),
+                        Select::make('investment_id')
+                            ->relationship('investments', 'project')
+                            ->label('Project, Invested In')
+                            ->required()
+                            ->searchable()
+                            ->preload(),
+                        Select::make('paymentMode')
+                            ->options([
+                                'cash' => 'Cash',
+                                'checque' => 'Cheque',
+                                'ibft' => 'IBFT',
+                                'wire transfer' => 'Wire Transfer',
+                                'pay order' => 'Pay Order',
+                            ])
+                            ->required(),
+                        TextInput::make('referenceNo')
+                            ->placeholder('Reference Number')
+                            ->default('0')
+                            ->label('Reference No.'),
+                        TextInput::make('bankName')
+                            ->placeholder('Bank Name')
+                            ->default('0')
+                            ->label('Bank Name'),
+                        TextInput::make('branchCode')
+                            ->placeholder('Branch Code')
+                            ->default('0')
+                            ->label('Branch Code'),
+                        TextInput::make('amount')
+                            ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
+                            ->required()
+                            ->placeholder('Amount')
+                            ->numeric(),
+                        Select::make('receivedAt')
+                            ->options([
+                                'Islamabad' => 'Islamabad',
+                                'Peshawar' => 'Peshawar',
+                                'Kohat' => 'Kohat',
+                                'Hangu' => 'Hangu',
+                                'D.I Khan' => 'D.I Khan',
+                                'Mardan' => 'Mardan'
+                            ])
+                            ->searchable()
+                            ->label('Received In')
+                    ])
+                    ->columns(2)
             ]);
     }
 
