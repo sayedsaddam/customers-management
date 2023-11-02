@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\CustomerResource\RelationManagers;
+namespace App\Filament\Resources\InvestmentResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
@@ -10,9 +10,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Resources\RelationManagers\RelationManager;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
-class InstallmentsRelationManager extends RelationManager
+class InstallmentRelationManager extends RelationManager
 {
-    protected static string $relationship = 'installments';
+    protected static string $relationship = 'installment';
 
     protected static ?string $recordTitleAttribute = 'id';
 
@@ -30,14 +30,14 @@ class InstallmentsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                TextColumn::make('id'),
-                TextColumn::make('customer.name'),
-                TextColumn::make('investment.project')->label('Project'),
+                TextColumn::make('investment.investmentAmount')->label('Investment ID'),
+                TextColumn::make('id')->label('ID'),
+                TextColumn::make('paymentMode')->label('Payment Mode'),
+                TextColumn::make('referenceNo')->label('Reference No'),
+                TextColumn::make('bankName')->label('Bank Name'),
                 TextColumn::make('amount')->label('Amount'),
-                TextColumn::make('receivedAt')->date()->label('Date'),
-                TextColumn::make('paymentMode')->label('Mode'),
-                TextColumn::make('bankName')->label('Bank'),
-                TextColumn::make('branchCode')->label('Br. Code'),
+                TextColumn::make('receivedAt')->date()->label('Date Received'),
+                TextColumn::make('created_at')->since()->label('Date Added'),
             ])
             ->filters([
                 //

@@ -14,7 +14,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use App\Filament\Resources\InvestmentResource\Pages;
-use Faker\Provider\ar_EG\Text;
+use App\Filament\Resources\InvestmentResource\RelationManagers\InstallmentRelationManager;
 
 class InvestmentResource extends Resource
 {
@@ -120,7 +120,7 @@ class InvestmentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            InstallmentRelationManager::class,
         ];
     }
 
