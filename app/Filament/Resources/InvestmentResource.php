@@ -15,6 +15,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use App\Filament\Resources\InvestmentResource\Pages;
 use App\Filament\Resources\InvestmentResource\RelationManagers\InstallmentRelationManager;
+use Filament\Forms\Components\Section;
 
 class InvestmentResource extends Resource
 {
@@ -28,7 +29,7 @@ class InvestmentResource extends Resource
     {
         return $form
             ->schema([
-                Card::make()
+                Section::make('Investment Information')
                 ->schema([
                     Select::make('customer_id')
                         ->relationship('customer', 'name')
@@ -57,40 +58,40 @@ class InvestmentResource extends Resource
                         ->searchable()
                         ->required(),
                     Select::make('rentalStatus')
-                            ->options([
-                                'active' => 'Active',
-                                'inactive' => 'Inactive',
-                            ])
-                            ->required(),
+                        ->options([
+                            'active' => 'Active',
+                            'inactive' => 'Inactive',
+                        ])
+                        ->required(),
                     TextInput::make('rentalPercentage')
-                            ->required()
-                            ->label('Rental Percentage')
-                            ->placeholder('Rental Percentage'),
+                        ->required()
+                        ->label('Rental Percentage')
+                        ->placeholder('Rental Percentage'),
                     TextInput::make('floorName')
-                            ->required()
-                            ->label('Floor Name')
-                            ->placeholder('Floor Name'),
+                        ->required()
+                        ->label('Floor Name')
+                        ->placeholder('Floor Name'),
                     TextInput::make('rate')
-                            ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
-                            ->required()
-                            ->placeholder('Rate')
-                            ->numeric(),
+                        ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
+                        ->required()
+                        ->placeholder('Rate')
+                        ->numeric(),
                     TextInput::make('saleValue')
-                            ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
-                            ->required()
-                            ->placeholder('Sale Value')
-                            ->numeric(),
+                        ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
+                        ->required()
+                        ->placeholder('Sale Value')
+                        ->numeric(),
                     TextInput::make('amountReceived')
-                            ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
-                            ->required()
-                            ->placeholder('Amount Received')
-                            ->numeric(),
+                        ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 0))
+                        ->required()
+                        ->placeholder('Amount Received')
+                        ->numeric(),
                     TextInput::make('sqft')
-                            ->required()
-                            ->label('Area in Sqft')
-                            ->placeholder('Area in sqft')
-
+                        ->required()
+                        ->label('Area in Sqft')
+                        ->placeholder('Area in sqft')
                 ])
+                ->collapsible()
                 ->columns(2)
             ]);
     }

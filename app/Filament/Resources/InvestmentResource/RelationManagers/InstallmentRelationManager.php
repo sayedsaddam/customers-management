@@ -2,11 +2,14 @@
 
 namespace App\Filament\Resources\InvestmentResource\RelationManagers;
 
-use Filament\Forms;
 use Filament\Tables;
+use App\Models\Customer;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
 use Filament\Resources\RelationManagers\RelationManager;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
@@ -14,15 +17,48 @@ class InstallmentRelationManager extends RelationManager
 {
     protected static string $relationship = 'installment';
 
-    protected static ?string $recordTitleAttribute = 'id';
+    protected static ?string $recordTitleAttribute = 'Installment';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id')
+                Select::make('customer_id')
+                    ->label('Customer Name')
+                    ->options(Customer::all()->pluck('name', 'id')->toArray())
+                    ->searchable()
+                    ->preload(),
+                Select::make('paymentMode')
+                    ->options([
+                        'cash' => 'Cash',
+                        'cheque' => 'Cheque',
+                        'ibft' => 'IBFT',
+                        'wire transfer' => 'Wire Transfer',
+                        'pay order' => 'Pay Order',
+                    ])
                     ->required()
-                    ->maxLength(255),
+                    ->searchable(),
+                TextInput::make('referenceNo')
+                    ->placeholder('Reference Number')
+                    ->default('0')
+                    ->label('Reference No.'),
+                TextInput::make('bankName')
+                    ->placeholder('Bank Name')
+                    ->default('0')
+                    ->label('Bank Name'),
+                TextInput::make('branchCode')
+                    ->placeholder('Branch Code')
+                    ->default('0')
+                    ->label('Branch Code'),
+                TextInput::make('amount')
+                    ->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: '', thousandsSeparator: ',', decimalPlaces: 2))
+                    ->required()
+                    ->placeholder('Amount')
+                    ->numeric(),
+                DatePicker::make('receivedAt')
+                    ->placeholder('Receiving Date')
+                    ->required()
+                    ->label('Receiving Date'),
             ]);
     }
 
