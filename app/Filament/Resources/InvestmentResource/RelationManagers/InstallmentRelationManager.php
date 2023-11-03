@@ -30,7 +30,9 @@ class InstallmentRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                TextColumn::make('investment.investmentAmount')->label('Investment ID'),
+                TextColumn::make('customer.name')->label('Customer'),
+                TextColumn::make('investment.project')->label('Project'),
+                TextColumn::make('investment.investmentAmount')->label('Amount Invested'),
                 TextColumn::make('id')->label('ID'),
                 TextColumn::make('paymentMode')->label('Payment Mode'),
                 TextColumn::make('referenceNo')->label('Reference No'),

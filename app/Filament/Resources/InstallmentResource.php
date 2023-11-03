@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use Filament\Tables;
+use App\Models\Customer;
 use App\Models\Installment;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
@@ -13,6 +14,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use App\Filament\Resources\InstallmentResource\Pages;
+use App\Models\Investment;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class InstallmentResource extends Resource
@@ -30,16 +32,22 @@ class InstallmentResource extends Resource
                 Card::make()
                     ->schema([
                         Select::make('customer_id')
-                            ->relationship('customer', 'name')
+                            ->label('Customer Name')
+                            ->options(Customer::all()->pluck('name', 'id')->toArray())
+                            ->reactive()
+                            ->afterStateUpdated(fn (callable $set) => $set('investment_id', null))
                             ->searchable()
-                            ->required()
                             ->preload(),
                         Select::make('investment_id')
-                            ->relationship('investment', 'project')
                             ->label('Project, Invested In')
-                            ->required()
-                            ->searchable()
-                            ->preload(),
+                            ->options(function (callable $get){
+                                $investments = Customer::find($get('customer_id'));
+                                if(!$investments){
+                                    return Investment::all()->pluck('project', 'id');
+                                }
+                                return $investments->investments->pluck('project', 'id');
+                            })
+                            ->searchable(),
                         Select::make('paymentMode')
                             ->options([
                                 'cash' => 'Cash',
