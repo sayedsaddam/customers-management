@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('buyback_transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->nullable();
-            $table->string('buybackAmount')->nullable();
+            $table->bigInteger('buybackAmount')->nullable();
             $table->dateTime('buybackDate')->nullable();
             $table->timestamps();
         });

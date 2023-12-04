@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('investments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->nullable();
-            $table->string('investmentAmount')->nullable();
+            $table->bigInteger('investmentAmount')->nullable();
             $table->dateTime('investmentDate')->nullable();
             $table->timestamps();
         });

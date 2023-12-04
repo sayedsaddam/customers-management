@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('sqft')->after('floorName')->nullable();
             $table->string('rate')->after('floorName')->nullable();
             $table->string('saleValue')->after('rate')->nullable();
-            $table->string('amountReceived')->after('saleValue')->nullable();
+            $table->bigInteger('amountReceived')->after('saleValue')->nullable();
         });
     }
 

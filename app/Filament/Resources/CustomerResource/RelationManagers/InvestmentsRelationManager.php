@@ -97,7 +97,7 @@ class InvestmentsRelationManager extends RelationManager
                 TextColumn::make('investmentDate')->dateTime('M d, Y')->label('Investment Date'),
                 TextColumn::make('investmentAmount')->label('Amount'),
                 TextColumn::make('saleValue')->label('Sale Value'),
-                TextColumn::make('sqft')->label('Area'),
+                TextColumn::make('sqft')->label('Sqft'),
                 TextColumn::make('floorName')->label('Floor'),
                 TextColumn::make('rate')->label('Rate /sqft'),
                 TextColumn::make('project'),

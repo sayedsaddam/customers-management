@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('investments', function (Blueprint $table) {
             $table->string('project')->after('investmentDate')->nullable();
-            $table->string('rentalPercentage')->after('project')->nullable();
+            $table->decimal('rentalPercentage', 2, 2)->after('project')->nullable();
         });
     }
 

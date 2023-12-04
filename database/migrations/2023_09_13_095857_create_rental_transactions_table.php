@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('rental_transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->nullable();
-            $table->string('rentalAmount')->nullable();
+            $table->bigInteger('rentalAmount')->nullable();
             $table->dateTime('rentalDate')->nullable();
             $table->timestamps();
         });
