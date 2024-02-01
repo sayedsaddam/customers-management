@@ -20,7 +20,7 @@ class BuybackTransactionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-x-circle';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $navigationLabel = 'Buybacks';
 
